@@ -1,7 +1,7 @@
 include build/config.mk
 
 TARGET_ASMFLAGS += -f elf64
-TARGET_CFLAGS += -ffreestanding -nostdlib -I src/kernel -I src/libc -I src/kernel/debug -I lib/boot
+TARGET_CFLAGS += -ffreestanding -nostdlib -I src/kernel -I src/libc -I src/kernel/debug -I lib/boot -I src/kernel/memory
 TARGET_LIBS += -lgcc
 TARGET_LINKFLAGS += -T arch/x86_64/linker.ld -nostdlib
 
