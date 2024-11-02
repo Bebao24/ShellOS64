@@ -1,6 +1,10 @@
 extern long_mode_start
 global start
 
+global page_table_l4
+global page_table_l3
+global page_table_l2
+
 [bits 32]
 
 section .text
