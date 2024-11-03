@@ -7,6 +7,7 @@
 #include <multiboot2.h>
 #include <bitmap.h>
 #include <string.h>
+#include <memory.h>
 
 struct multiboot_tag_framebuffer* tagfb = NULL;
 
@@ -38,8 +39,6 @@ void initSystem(unsigned long address)
     debugf("Total mbi size 0x%x\n", (uint32_t) tag - address);
 }
 
-uint8_t testBuffer[15];
-
 void kernel_start(unsigned long magic, unsigned long address)
 {
     if (magic != MULTIBOOT2_BOOTLOADER_MAGIC)
@@ -52,19 +51,9 @@ void kernel_start(unsigned long magic, unsigned long address)
 
     debugf("System initialize successfully!\n");
 
-    initializeBitmap(&testBuffer[0]);
-    memset(testBuffer, 0, sizeof(testBuffer));
+    uint64_t totalMemorySize = getMemorySize(address);
 
-    Bitmap_Set(0, true);
-    Bitmap_Set(5, true);
-    Bitmap_Set(10, true);
-    Bitmap_Set(11, true);
-
-    for (int i = 0; i < 15; i++)
-    {
-        debugf(Bitmap_Get(i) ? "true" : "false");
-        debugc('\n');
-    }
+    debugf("Total memory size: %llu MB", totalMemorySize / 1024 / 1024);
 
     while (1)
     {

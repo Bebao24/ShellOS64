@@ -41,7 +41,7 @@ clean:
 	rm -rf dist/
 
 run:
-	qemu-system-x86_64 -debugcon stdio -cdrom dist/x86_64/ShellOS.iso -display sdl,gl=on
+	qemu-system-x86_64 -debugcon stdio -cdrom dist/x86_64/ShellOS.iso -display sdl,gl=on -m 256M
 
 
 
